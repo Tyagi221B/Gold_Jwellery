@@ -35,7 +35,7 @@ const AdminSidebar = () => {
         </button>
       )}
 		<aside 
-		className="w-full bg-white p-1 z-10 overflow-y-auto"
+		className="w-full h-screen bg-white p-1 z-10 overflow-y-auto"
 		style={
 			phoneActive
 				? {

@@ -21,18 +21,19 @@ const ProductCard = ({
   handler,
 }: ProductsProps) => {
   return (
-    <div className="product-card">
-      <img src={`${server}/${photo}`} alt={name} />
+    <div className="product-card flex flex-col border border-gray-400 p-3 rounded-md">
+      <img className="h-56 w-56" src={`${server}/${photo}`} alt={name} />
       <p>{name}</p>
       <span>₹{price}</span>
 
       <div>
         <button
+        className="border border-black rounded-lg w-full flex items-center justify-between pl-4 pr-4"
           onClick={() =>
             handler({ productId, price, name, photo, stock, quantity: 1 })
           }
         >
-          <FaPlus />
+          Add to Cart <FaPlus />
         </button>
       </div>
     </div>

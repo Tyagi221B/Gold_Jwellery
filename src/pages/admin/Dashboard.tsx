@@ -27,7 +27,7 @@ const Dashboard = () => {
 	if (isError) return <Navigate to={"/"} />;
 
 	return (
-		<div className="admin-container flex bg-[#f7f7f7] h-screen ">
+		<div className="admin-container flex bg-[#f7f7f7] h-screen">
 			<div className="w-1/6">
 				<AdminSidebar />
 			</div>
@@ -84,7 +84,7 @@ const Dashboard = () => {
 						</section>
 
 						{/* Second Row */}
-						<section className="graph-container flex flex-row gap-8 pr-8 pb-8">
+						<section className="graph-container flex flex-row gap-8 pr-8 pb-8 pl-1">
 							{/* Revenue & Transaction Section */}
 							<div className="revenue-chart bg-white rounded-lg w-full pt-4 pr-12">
 								<h2 className="tracking-wider font-bold uppercase mt-4 mr-0 mb-1 text-center">
@@ -124,7 +124,7 @@ const Dashboard = () => {
 						</section>
 
 						{/* Third Row */}
-						<section className="transaction-container flex gap-8 pr-8 pb-14">
+						<section className="transaction-container flex gap-8 pr-8 pb-14 bg-[#f7f7f7] p-1">
 							{/* Gender Chart */}
 							<div className="gender-chart bg-white shadow shadow-black rounded-xl w-full max-w-80 p-4 relative">
 								<h2 className="text-center mt-6 mb-8 tracking-wider font-bold uppercase">
@@ -186,7 +186,7 @@ const WidgetItem = ({
 
 		<div className="justify-center items-center">
     <div
-			className="widget-circle relative border h-20 w-20 rounded-full grid justify-center items-center bg-teal-300 before:contents-[''] before:relative before:h-16 before:w-16 before:bg-white before:rounded-full"
+			className="widget-circle relative border h-20 w-20 rounded-full grid justify-center items-center bg-teal-300 before:contents-[''] before:absolute before:left-[6.8px] before:h-16 before:w-16 before:bg-white before:rounded-full"
 			style={{
 				background: `conic-gradient(
         ${color} ${(Math.abs(percent) / 100) * 360}deg,

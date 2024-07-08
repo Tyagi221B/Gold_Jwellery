@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import {
   FaSearch,
-  FaShoppingBag,
   FaSignInAlt,
   FaUser,
   FaSignOutAlt,
@@ -12,6 +11,8 @@ import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import toast from "react-hot-toast";
 import { useCategoriesQuery } from "../redux/api/productAPI";
+import { HiShoppingCart } from "react-icons/hi";
+import { IoLogoGoogle } from "react-icons/io";
 
 interface PropsType {
   user: User | null;
@@ -39,15 +40,23 @@ const Header = ({ user }: PropsType) => {
 
   return (
     <div className="w-full flex flex-wrap justify-center">
-    <nav className="flex bg-[#F2E9E9] w-full justify-center gap-10 h-16">
+    <nav className="flex bg-[#F2E9E9] w-full justify-center gap-10 h-16 items-center">
       <Link onClick={() => setIsOpen(false)} to={"/"}>
-        HOME
+      <div className="bg-white rounded-full p-3 text-2xl" ><IoLogoGoogle/></div>
       </Link>
-      <Link onClick={() => setIsOpen(false)} to={"/search"}>
-        <FaSearch />
+    <div className="flex gap-4">
+      {!loadingCategories &&
+              categoriesResponse?.categories.map((i) => (
+                <option key={i} value={i}>
+                  {i.toUpperCase()}
+                </option>
+              ))}
+      </div>
+      <Link className="flex items-center gap-16 bg-white rounded-md pr-2 pl-2 pt-2 pb-2" onClick={() => setIsOpen(false)} to={"/search"}>
+        Search <FaSearch />
       </Link>
       <Link onClick={() => setIsOpen(false)} to={"/cart"}>
-        <FaShoppingBag />
+        <HiShoppingCart />
       </Link>
 
       {user?._id ? (
@@ -79,14 +88,7 @@ const Header = ({ user }: PropsType) => {
       )}
     </nav>
     <div className="nav2">
-      <div className="flex gap-4">
-      {!loadingCategories &&
-              categoriesResponse?.categories.map((i) => (
-                <option key={i} value={i}>
-                  {i.toUpperCase()}
-                </option>
-              ))}
-      </div>
+      
     </div>
 
     </div>
