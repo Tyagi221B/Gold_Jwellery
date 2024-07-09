@@ -73,19 +73,21 @@ const TransactionManagement = () => {
   if (isError) return <Navigate to={"/404"} />;
 
   return (
-    <div className="admin-container">
-      <AdminSidebar />
-      <main className="product-management">
+    <div className="admin-container flex bg-[#f7f7f7] h-screen">
+      <div className="w-1/6">
+				<AdminSidebar />
+			</div>
+      <main className="product-management flex flex-row justify-center p-16 w-5/6">
         {isLoading ? (
           <Skeleton />
         ) : (
           <>
-            <section
+            <section className="overflow-y-auto w-full h-full max-w-[500px] shadow-sm shadow-black bg-white p-20 flex flex-col gap-4 relative rounded-md "
               style={{
                 padding: "2rem",
               }}
             >
-              <h2>Order Items</h2>
+              <h2 className="uppercase tracking-wider">Order Items</h2>
 
               {orderItems.map((i) => (
                 <ProductCard
@@ -104,22 +106,22 @@ const TransactionManagement = () => {
               <button className="product-delete-btn" onClick={deleteHandler}>
                 <FaTrash />
               </button>
-              <h1>Order Info</h1>
-              <h5>User Info</h5>
-              <p>Name: {name}</p>
-              <p>
+              <h1 className="text-center tracking-wider font-bold uppercase">Order Info</h1>
+              <h5 className="mt-8 ml-2 text-xl font-extrabold">User Info</h5>
+              <p className="m-2">Name: {name}</p>
+              <p className="m-2">
                 Address:{" "}
                 {`${address}, ${city}, ${state}, ${country} ${pinCode}`}
               </p>
-              <h5>Amount Info</h5>
-              <p>Subtotal: {subtotal}</p>
-              <p>Shipping Charges: {shippingCharges}</p>
-              <p>Tax: {tax}</p>
-              <p>Discount: {discount}</p>
-              <p>Total: {total}</p>
+              <h5 className="mt-8 ml-2 text-xl font-extrabold">Amount Info</h5>
+              <p className="m-2">Subtotal: {subtotal}</p>
+              <p className="m-2">Shipping Charges: {shippingCharges}</p>
+              <p className="m-2">Tax: {tax}</p>
+              <p className="m-2">Discount: {discount}</p>
+              <p className="m-2">Total: {total}</p>
 
-              <h5>Status Info</h5>
-              <p>
+              <h5 className="mt-8 ml-2 text-xl font-extrabold">Status Info</h5>
+              <p className="m-2">
                 Status:{" "}
                 <span
                   className={
@@ -133,7 +135,9 @@ const TransactionManagement = () => {
                   {status}
                 </span>
               </p>
-              <button className="shipping-btn" onClick={updateHandler}>
+              <button 
+              className="shipping-btn mt-8 p-4 bg-blue-500 text-white rounded-md text-xl cursor-pointer w-full hover:opacity-80"
+              onClick={updateHandler}>
                 Process Status
               </button>
             </article>
@@ -151,10 +155,10 @@ const ProductCard = ({
   quantity,
   productId,
 }: OrderItem) => (
-  <div className="transaction-product-card">
-    <img src={photo} alt={name} />
+  <div className="transaction-product-card flex flex-row items-center gap-4">
+    <img className="h-16 w-16 object-cover rounded-md" src={photo} alt={name} />
     <Link to={`/product/${productId}`}>{name}</Link>
-    <span>
+    <span className="ml-auto">
       ₹{price} X {quantity} = ₹{price * quantity}
     </span>
   </div>

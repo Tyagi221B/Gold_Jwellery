@@ -56,13 +56,15 @@ const NewProduct = () => {
 	return (
 		<div className="admin-container">
 			<AdminSidebar />
-			<main className="product-management">
-				<article>
-					<form onSubmit={submitHandler}>
-						<h2>New Product</h2>
-						<div>
+			<main className="product-management flex flex-row justify-center p-16">
+				<article className="h-full p-8 w-full max-w-[400px] bg-white rounded-md shadow-sm shadow-black">
+					<form  
+					className="flex flex-col items-center gap-8"
+					onSubmit={submitHandler}>
+						<h2 className="uppercase tracking-wider">New Product</h2>
+						<div className="w-full relative">
 							<label>Name</label>
-							<input
+							<input className="w-full p-4 border border-black rounded-md"
 								required
 								type="text"
 								placeholder="Name"
@@ -70,9 +72,9 @@ const NewProduct = () => {
 								onChange={(e) => setName(e.target.value)}
 							/>
 						</div>
-						<div>
+						<div className="w-full relative">
 							<label>Price</label>
-							<input
+							<input className="w-full p-4 border border-black rounded-md"
 								required
 								type="number"
 								placeholder="Price"
@@ -80,9 +82,9 @@ const NewProduct = () => {
 								onChange={(e) => setPrice(Number(e.target.value))}
 							/>
 						</div>
-						<div>
-							<label>Stock</label>
-							<input
+						<div className="w-full relative">
+							<label className="absolute left-0 -top-6">Stock</label>
+							<input className="w-full p-4 border border-black rounded-md"
 								required
 								type="number"
 								placeholder="Stock"
@@ -91,9 +93,9 @@ const NewProduct = () => {
 							/>
 						</div>
 
-						<div>
-							<label>Category</label>
-							<input
+						<div className="w-full relative">
+							<label className="absolute left-0 -top-6">Category</label>
+							<input className="w-full p-4 border border-black rounded-md"
 								required
 								type="text"
 								placeholder="eg. laptop, camera etc"
@@ -102,13 +104,13 @@ const NewProduct = () => {
 							/>
 						</div>
 
-						<div>
-							<label>Photo</label>
-							<input required type="file" onChange={changeImageHandler} />
+						<div className="w-full relative">
+							<label className="absolute left-0 -top-6">Photo</label>
+							<input className="w-full p-4 border border-black rounded-md" required type="file" onChange={changeImageHandler} />
 						</div>
 
-						{photoPrev && <img src={photoPrev} alt="New Image" />}
-						<button type="submit">Create</button>
+						{photoPrev && <img className="h-20 w-20 object-cover rounded-md" src={photoPrev} alt="New Image" />}
+						<button className="p-4 bg-blue-500 text-white rounded-md text-xl cursor-pointer" type="submit">Create</button>
 					</form>
 				</article>
 			</main>

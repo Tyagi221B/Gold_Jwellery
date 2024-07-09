@@ -58,7 +58,7 @@ const Products = () => {
     if (data)
       setRows(
         data.products.map((i) => ({
-          photo: <img src={`${server}/${i.photo}`} />,
+          photo: <img className="h-40 w-56 object-cover ml-auto mr-auto" src={`${server}/${i.photo}`} />,
           name: i.name,
           price: i.price,
           stock: i.stock,
@@ -70,16 +70,18 @@ const Products = () => {
   const Table = TableHOC<DataType>(
     columns,
     rows,
-    "dashboard-product-box",
+    "dashboard-product-box bg-white p-8 overflow-auto h-full w-full rounded-md",
     "Products",
     rows.length > 6
   )();
 
   return (
-    <div className="admin-container">
-      <AdminSidebar />
-      <main>{isLoading ? <Skeleton length={20} /> : Table}</main>
-      <Link to="/admin/product/new" className="create-product-btn">
+    <div className="admin-container flex bg-[#f7f7f7] h-screen">
+      <div className="w-1/6">
+				<AdminSidebar />
+			</div>
+      <main className="w-5/6 mr-auto ml-auto" >{isLoading ? <Skeleton length={20} /> : Table}</main>
+      <Link to="/admin/product/new" className="create-product-btn fixed right-8 top-20 h-10 w-10 flex flex-row justify-center items-center gap-0 rounded-full bg-red-600 text-white hover:opacity-80">
         <FaPlus />
       </Link>
     </div>

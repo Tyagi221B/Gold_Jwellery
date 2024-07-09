@@ -82,12 +82,12 @@ function TableHOC<T extends Object>(
         </table>
 
         {showPagination && (
-          <div className="table-pagination">
-            <button disabled={!canPreviousPage} onClick={previousPage}>
+          <div className="table-pagination flex flex-row justify-center items-center gap-4 p-8">
+            <button className="pt-2 pb-2 pr-4 pl-4 rounded-xl cursor-pointer bg-blue-500 text-white disabled:bg-black disabled:cursor-not-allowed" disabled={!canPreviousPage} onClick={previousPage}>
               Prev
             </button>
             <span>{`${pageIndex + 1} of ${pageCount}`}</span>
-            <button disabled={!canNextPage} onClick={nextPage}>
+            <button className="pt-2 pb-2 pr-4 pl-4 rounded-xl cursor-pointer bg-blue-500 text-white disabled:bg-black disabled:cursor-not-allowed" disabled={!canNextPage} onClick={nextPage}>
               Next
             </button>
           </div>

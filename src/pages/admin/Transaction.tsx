@@ -87,14 +87,16 @@ const Transaction = () => {
   const Table = TableHOC<DataType>(
     columns,
     rows,
-    "dashboard-product-box",
+    "dashboard-product-box bg-white p-8 overflow-auto h-full w-full rounded-md",
     "Transactions",
     rows.length > 6
   )();
   return (
-    <div className="admin-container">
-      <AdminSidebar />
-      <main>{isLoading ? <Skeleton length={20} /> : Table}</main>
+    <div className="admin-container flex bg-[#f7f7f7] h-screen">
+      <div className="w-1/6">
+				<AdminSidebar />
+			</div>
+      <main className="w-5/6 ml-auto mr-auto">{isLoading ? <Skeleton length={20} /> : Table}</main>
     </div>
   );
 };

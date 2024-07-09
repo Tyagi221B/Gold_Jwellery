@@ -61,15 +61,18 @@ const Shipping = () => {
   }, [cartItems]);
 
   return (
-    <div className="shipping">
-      <button className="back-btn" onClick={() => navigate("/cart")}>
+    <div className="shipping flex flex-row justify-center items-center gap-4">
+      <button className="back-btn h-10 w-10 bg-[#2e2e2e] text-white flex justify-center items-center fixed top-32 left-32 rounded-full border-none outline-none cursor-pointer shadow-sm shadow-[#00000062]" onClick={() => navigate("/cart")}>
         <BiArrowBack />
       </button>
 
-      <form onSubmit={submitHandler}>
-        <h1>Shipping Address</h1>
+      <form
+      className="max-w-[450px] w-full flex flex-col justify-center items-stretch gap-8
+      p-8"
+      onSubmit={submitHandler}>
+        <h1 className="tracking-wider font-bold uppercase m-8 text-center text-xl">Shipping Address</h1>
 
-        <input
+        <input className="border border-[#1f1f1f5a] p-4 outline-none text-xl rounded-md"
           required
           type="text"
           placeholder="Address"
@@ -78,7 +81,7 @@ const Shipping = () => {
           onChange={changeHandler}
         />
 
-        <input
+        <input className="border border-[#1f1f1f5a] p-4 outline-none text-xl rounded-md"
           required
           type="text"
           placeholder="City"
@@ -87,7 +90,7 @@ const Shipping = () => {
           onChange={changeHandler}
         />
 
-        <input
+        <input className="border border-[#1f1f1f5a] p-4 outline-none text-xl rounded-md"
           required
           type="text"
           placeholder="State"
@@ -96,7 +99,7 @@ const Shipping = () => {
           onChange={changeHandler}
         />
 
-        <select
+        <select className="border border-[#1f1f1f5a] p-4 outline-none text-xl rounded-md"
           name="country"
           required
           value={shippingInfo.country}
@@ -106,7 +109,7 @@ const Shipping = () => {
           <option value="india">India</option>
         </select>
 
-        <input
+        <input className="border border-[#1f1f1f5a] p-4 outline-none text-xl rounded-md"
           required
           type="number"
           placeholder="Pin Code"
@@ -115,7 +118,7 @@ const Shipping = () => {
           onChange={changeHandler}
         />
 
-        <button type="submit">Pay Now</button>
+        <button className="p-4 bg-[#006888] text-white outline-none rounded-md text-xl uppercase tracking-wider hover:opacity-80" type="submit">Pay Now</button>
       </form>
     </div>
   );

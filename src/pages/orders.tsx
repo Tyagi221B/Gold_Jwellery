@@ -86,13 +86,13 @@ const Orders = () => {
   const Table = TableHOC<DataType>(
     column,
     rows,
-    "dashboard-product-box",
+    "dashboard-product-box bg-white p-8 overflow-auto h-full w-full rounded-md",
     "Orders",
     rows.length > 6
   )();
   return (
-    <div className="container">
-      <h1>My Orders</h1>
+    <div className="container max-w-[1367px] w-full m-auto overflow-auto">
+      <h1 className="tracking-wider font-bold uppercase mx-4 text-center">My Orders</h1>
       {isLoading ? <Skeleton length={20} /> : Table}
     </div>
   );

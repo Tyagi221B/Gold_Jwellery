@@ -66,8 +66,9 @@ const Cart = () => {
   }, [cartItems]);
 
   return (
-    <div className="cart">
-      <main>
+    <div className="cart py-8 px-16 flex flex-row gap-16 h-screen">
+      <main className="w-9/12 overflow-y-auto scroll-smooth">
+      {/* TODO: make the scrollbar display none */}
         {cartItems.length > 0 ? (
           cartItems.map((i, idx) => (
             <CartItemCard
@@ -79,21 +80,22 @@ const Cart = () => {
             />
           ))
         ) : (
-          <h1>No Items Added</h1>
+          <h1 className="tracking-wider font-bold uppercase text-center">No Items Added</h1>
         )}
       </main>
-      <aside>
-        <p>Subtotal: ₹{subtotal}</p>
-        <p>Shipping Charges: ₹{shippingCharges}</p>
-        <p>Tax: ₹{tax}</p>
-        <p>
+      <aside className="w-4/12 p-16 flex flex-col justify-center items-stretch gap-6">
+        <p className="text-xl">Subtotal: ₹{subtotal}</p>
+        <p className="text-xl">Shipping Charges: ₹{shippingCharges}</p>
+        <p className="text-xl">Tax: ₹{tax}</p>
+        <p className="text-xl">
           Discount: <em className="red"> - ₹{discount}</em>
         </p>
-        <p>
+        <p className="text-xl">
           <b>Total: ₹{total}</b>
         </p>
 
         <input
+        className="p-4 border border-black outline-none rounded-md mt-8"
           type="text"
           placeholder="Coupon Code"
           value={couponCode}
@@ -102,16 +104,16 @@ const Cart = () => {
 
         {couponCode &&
           (isValidCouponCode ? (
-            <span className="green">
-              ₹{discount} off using the <code>{couponCode}</code>
+            <span className="green -mt-4 flex flex-row justify-center items-center gap-1">
+              ₹{discount} off using the <code className="font-extrabold self-end">{couponCode}</code>
             </span>
           ) : (
-            <span className="red">
+            <span className="red -mt-4 flex flex-row justify-center items-center gap-1">
               Invalid Coupon <VscError />
             </span>
           ))}
 
-        {cartItems.length > 0 && <Link to="/shipping">Checkout</Link>}
+        {cartItems.length > 0 && <Link className="bg-[#2e2e2e] p-4 no-underline text-white flex flex-row justify-center items-center gap-4 uppercase tracking-wider rounded-md hover:opacity-80" to="/shipping">Checkout</Link>}
       </aside>
     </div>
   );

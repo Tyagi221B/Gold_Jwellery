@@ -58,12 +58,13 @@ const Search = () => {
     toast.error(err.data.message);
   }
   return (
-    <div className="product-search-page">
-      <aside>
-        <h2>Filters</h2>
+    <div className="product-search-page p-8 flex flex-row justify-start items-stretch gap-8 min-h-96">
+      <aside className="min-w-80 shadow-md shadow-black p-8 flex flex-col justify-start items-stretch gap-2">
+        <h2 className="tracking-wider font-bold uppercase">Filters</h2>
         <div>
           <h4>Sort</h4>
-          <select value={sort} onChange={(e) => setSort(e.target.value)}>
+          <select
+          className="w-full p-4 bg-white border border-slate-800 rounded-lg m-2" value={sort} onChange={(e) => setSort(e.target.value)}>
             <option value="">None</option>
             <option value="asc">Price (Low to High)</option>
             <option value="dsc">Price (High to Low)</option>
@@ -73,6 +74,7 @@ const Search = () => {
         <div>
           <h4>Max Price: {maxPrice || ""}</h4>
           <input
+          className="w-full p-4 bg-white border border-slate-800 rounded-lg m-2"
             type="range"
             min={100}
             max={100000}
@@ -99,9 +101,10 @@ const Search = () => {
       </aside>
 
       {/* Products section  */}
-      <main>
-        <h1>Products</h1>
+      <main className="w-full pr-8">
+        <h1 className="tracking-wider font-bold uppercase">Products</h1>
         <input
+        className="w-1/2 p-4 rounded-md m-4 text-xl block"
           type="text"
           placeholder="Search by name..."
           value={search}
@@ -111,7 +114,7 @@ const Search = () => {
         {productLoading ? (
           <Skeleton length={10} />
         ) : (
-          <div className="search-product-list">
+          <div className="search-product-list flex flex-row justify-start items-start flex-wrap h-full overflow-y-auto gap-1">
             {searchedData?.products.map((i) => (
               <ProductCard
                 key={i._id}
@@ -127,8 +130,9 @@ const Search = () => {
         )}
 
         {searchedData && searchedData.totalPage > 1 && (
-          <article>
+          <article className="flex flex-row justify-center items-center gap-4 ">
             <button
+            className="flex flex-row justify-center items-center gap-4 cursor-pointer pt-2 pr-4 bg-[#006888] text-white rounded-xl text-center disabled:cursor-not-allowed disabled:opacity-50 disabled:text-[#2E2E2E]"
               disabled={!isPrevPage}
               onClick={() => setPage((prev) => prev - 1)}
             >

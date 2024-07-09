@@ -21,9 +21,9 @@ const ProductCard = ({
   handler,
 }: ProductsProps) => {
   return (
-    <div className="product-card flex flex-col border border-gray-400 p-3 rounded-md">
-      <img className="h-56 w-56" src={`${server}/${photo}`} alt={name} />
-      <p>{name}</p>
+    <div className="product-card flex flex-col border border-gray-300 p-3 rounded-md min-w-60 max-w-64">
+      <img className="h-56 max-w-56 min-w-56" src={`${server}/${photo}`} alt={name} />
+      <p className="whitespace-nowrap overflow-hidden overflow-ellipsis">{name}</p>
       <span>₹{price}</span>
 
       <div>

@@ -31,7 +31,7 @@ const Dashboard = () => {
 			<div className="w-1/6">
 				<AdminSidebar />
 			</div>
-			<main className="dashboard w-5/6">
+			<main className="dashboard w-5/6 ml-auto mr-auto">
 				{isLoading ? (
 					<Skeleton length={20} />
 				) : (
