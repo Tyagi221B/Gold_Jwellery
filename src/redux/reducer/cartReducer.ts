@@ -33,14 +33,28 @@ export const cartReducer = createSlice({
       if (index !== -1) state.cartItems[index] = action.payload;
       else state.cartItems.push(action.payload);
       state.loading = false;
+      // Save updated cart to local storage
+      localStorage.setItem('cartItems', JSON.stringify(state.cartItems));
     },
 
+    // removeCartItem: (state, action: PayloadAction<string>) => {
+    //   state.loading = true;
+    //   state.cartItems = state.cartItems.filter(
+    //     (i) => i.productId !== action.payload
+    //   );
+    //   state.loading = false;
+    // },
+    
     removeCartItem: (state, action: PayloadAction<string>) => {
       state.loading = true;
-      state.cartItems = state.cartItems.filter(
+      const updatedCartItems = state.cartItems.filter(
         (i) => i.productId !== action.payload
       );
+      state.cartItems = updatedCartItems;
       state.loading = false;
+    
+      // Update local storage with filtered cart items
+      localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
     },
 
     calculatePrice: (state) => {
