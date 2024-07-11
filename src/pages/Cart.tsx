@@ -79,7 +79,6 @@ const Cart = () => {
 	return (
 		<div className="cart py-8 px-16 flex flex-row gap-16 h-screen">
 			<main className="w-9/12 overflow-y-auto scroll-smooth">
-				{/* TODO: make the scrollbar display none */}
 				{cartItems.length > 0 ? (
 					cartItems.map((i, idx) => (
 						<CartItemCard
@@ -91,9 +90,19 @@ const Cart = () => {
 						/>
 					))
 				) : (
-					<h1 className="tracking-wider font-bold uppercase text-center">
-						No Items Added
-					</h1>
+					// <h1 className="tracking-wider font-bold uppercase text-center">
+					// 	No Items Added
+					// </h1>
+					<div className="flex items-center justify-center h-full">
+					<div className="text-center flex flex-col items-center">
+						<img className="h-24 w-24 mb-8" src="https://www.tanishq.co.in/on/demandware.static/-/Library-Sites-TanishqSharedLibrary/default/dw39d0b5f4/images/cart/Group14779.svg" alt="" />
+						<h1 className="text-4xl font-bold text-[#832729]">Your Cart is Empty</h1>
+						<p className="mt-4 text-lg text-[#832729]">It looks like you haven't added anything to your cart yet.</p>
+						<button className="mt-6 px-4 py-2 bg-[#832729] text-white rounded hover:bg-[#a53335] hover:shadow-2xl hover:shadow-[#832729]">
+							<Link to={"/"}>Continue Shopping</Link>
+						</button>
+					</div>
+				</div>
 				)}
 			</main>
 			<aside className="w-4/12 p-16 flex flex-col justify-center items-stretch gap-6">

@@ -87,10 +87,6 @@ const Header = ({ user }: PropsType) => {
         </Link>
       )}
     </nav>
-    <div className="nav2">
-      
-    </div>
-
     </div>
 
   );
