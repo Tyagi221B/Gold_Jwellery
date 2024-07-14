@@ -19,22 +19,23 @@ const Productmanagement = () => {
 	const navigate = useNavigate();
 
 	const { data, isLoading, isError } = useProductDetailsQuery(params.id!);
-	// console.log(data);
 
-	const { price, photo, name, stock, category, description } = data?.product || {
-		photo: "",
-		category: "",
-		name: "",
-		stock: 0,
-		price: 0,
-		description: "",
-	};
+	const { price, photo, name, stock, category, description } =
+		data?.product || {
+			photo: "",
+			category: "",
+			name: "",
+			stock: 0,
+			price: 0,
+			description: "",
+		};
 
 	const [priceUpdate, setPriceUpdate] = useState<number>(price);
 	const [stockUpdate, setStockUpdate] = useState<number>(stock);
 	const [nameUpdate, setNameUpdate] = useState<string>(name);
 	const [categoryUpdate, setCategoryUpdate] = useState<string>(category);
-	const [descriptionUpdate, setdescriptionUpdate] = useState<string>(description);
+	const [descriptionUpdate, setdescriptionUpdate] =
+		useState<string>(description);
 	const [photoUpdate, setPhotoUpdate] = useState<string>("");
 	const [photoFile, setPhotoFile] = useState<File>();
 
@@ -68,7 +69,7 @@ const Productmanagement = () => {
 			formData.set("stock", stockUpdate.toString());
 		if (photoFile) formData.set("photo", photoFile);
 		if (categoryUpdate) formData.set("category", categoryUpdate);
-		if (descriptionUpdate) formData.set("category", descriptionUpdate);
+		if (descriptionUpdate) formData.set("description", descriptionUpdate);
 
 		const res = await updateProduct({
 			formData,
@@ -101,9 +102,11 @@ const Productmanagement = () => {
 	if (isError) return <Navigate to={"/404"} />;
 
 	return (
-		<div className="admin-container">
-			<AdminSidebar />
-			<main className="product-management flex flex-row justify-center items-center p-16">
+		<div className="admin-container flex bg-[#f7f7f7] h-screen">
+			<div className="w-1/6">
+				<AdminSidebar />
+			</div>{" "}
+			<main className="product-management flex flex-row justify-center items-center p-16  w-5/6 gap-8">
 				{isLoading ? (
 					<Skeleton length={20} />
 				) : (
@@ -173,7 +176,7 @@ const Productmanagement = () => {
 									<input
 										className="w-full p-4 border border-black rounded-md"
 										type="text"
-										placeholder="eg. laptop, camera etc"
+										placeholder="Chain, Earing, Necklace, Bracelette"
 										value={categoryUpdate}
 										onChange={(e) => setCategoryUpdate(e.target.value)}
 									/>
@@ -185,7 +188,7 @@ const Productmanagement = () => {
 									<input
 										className="w-full p-4 border border-black rounded-md"
 										type="text"
-										placeholder="eg. laptop, camera etc"
+										placeholder="Add about this product"
 										value={descriptionUpdate}
 										onChange={(e) => setdescriptionUpdate(e.target.value)}
 									/>
@@ -200,8 +203,19 @@ const Productmanagement = () => {
 									/>
 								</div>
 
-								{photoUpdate && <img className="h-20 w-20 object-cover rounded-md" src={photoUpdate} alt="New Image" />}
-								<button className="p-4 bg-blue-500 text-white rounded-md text-xl cursor-pointer" type="submit">Update</button>
+								{photoUpdate && (
+									<img
+										className="h-20 w-20 object-cover rounded-md"
+										src={photoUpdate}
+										alt="New Image"
+									/>
+								)}
+								<button
+									className="p-4 bg-blue-500 text-white rounded-md text-xl cursor-pointer"
+									type="submit"
+								>
+									Update
+								</button>
 							</form>
 						</article>
 					</>

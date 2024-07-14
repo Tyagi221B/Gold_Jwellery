@@ -47,13 +47,16 @@ const Coupon = () => {
   }, [coupon]);
 
   return (
-    <div className="admin-container">
-      <AdminSidebar />
-      <main className="dashboard-app-container">
-        <h1>Coupon</h1>
-        <section>
-          <form className="coupon-form" onSubmit={submitHandler}>
+    <div className="admin-container flex bg-[#f7f7f7] h-screen">
+      <div className="w-1/6">
+				<AdminSidebar />
+			</div>
+      <main className="dashboard-app-container w-5/6 ml-auto mr-auto bg-white p-32">
+        <h1 className="text-4xl font-bold text-center tracking-wide">Coupon</h1>
+        <section className="flex flex-col justify-center items-center gap-8 h-full">
+          <form className="coupon-form grid grid-cols-1 gap-4 grid-rows-1 max-w-96 w-full" onSubmit={submitHandler}>
             <input
+            className="p-4 border border-[#0000005c] outline-none rounded-md"
               type="text"
               placeholder="Text to include"
               value={prefix}
@@ -62,6 +65,7 @@ const Coupon = () => {
             />
 
             <input
+            className="p-4 border border-[#0000005c] outline-none rounded-md"
               type="number"
               placeholder="Coupon Length"
               value={size}
@@ -70,7 +74,7 @@ const Coupon = () => {
               max={25}
             />
 
-            <fieldset>
+            <fieldset className="p-4 border border-[#0000005c] rounded-md flex flex-row justify-evenly items-center gap-0 flex-wrap">
               <legend>Include</legend>
 
               <input
@@ -78,29 +82,29 @@ const Coupon = () => {
                 checked={includeNumbers}
                 onChange={() => setIncludeNumbers((prev) => !prev)}
               />
-              <span>Numbers</span>
+              <span className="text-xs">Numbers</span>
 
               <input
                 type="checkbox"
                 checked={includeCharacters}
                 onChange={() => setIncludeCharacters((prev) => !prev)}
               />
-              <span>Characters</span>
+              <span className="text-xs">Characters</span>
 
               <input
                 type="checkbox"
                 checked={includeSymbols}
                 onChange={() => setIncludeSymbols((prev) => !prev)}
               />
-              <span>Symbols</span>
+              <span className="text-xs">Symbols</span>
             </fieldset>
-            <button type="submit">Generate</button>
+            <button className="font-bold text-xl w-full p-4 border-none text-white cursor-pointer my-8 rounded-lg bg-[#0062ff]" type="submit">Generate</button>
           </form>
 
           {coupon && (
-            <code>
+            <code className="relative text-xl tracking-wider cursor-pointer">
               {coupon}{" "}
-              <span onClick={() => copyText(coupon)}>
+              <span className="opacity-0 hover:opacity-100 h-full w-full top-0 left-0 absolute rounded-md  bg-black text-white flex flex-row justify-center items-center gap-8 " onClick={() => copyText(coupon)}>
                 {isCopied ? "Copied" : "Copy"}
               </span>{" "}
             </code>

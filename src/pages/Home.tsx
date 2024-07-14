@@ -1,12 +1,19 @@
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 import { Skeleton } from "../components/loader";
 import ProductCard from "../components/product-card";
 import { useLatestProductsQuery } from "../redux/api/productAPI";
 import { addToCart } from "../redux/reducer/cartReducer";
 import { CartItem } from "../types/types";
 import ImageSlider from "../components/ImageSlider";
+import LineDesign from "../assets/Line-Design.svg";
+import {
+	Carousel,
+	CarouselContent,
+	CarouselItem,
+	CarouselNext,
+	CarouselPrevious,
+} from "../@/components/ui/carousel";
 
 const Home = () => {
 	const { data, isLoading, isError } = useLatestProductsQuery("");
@@ -44,15 +51,15 @@ const Home = () => {
 			<div className="w-full">
 				<ImageSlider images={IMAGES} />
 			</div>
-
-			<h1 className="text-bold text-3xl text-center mt-8">Latest Products</h1>
-			<h2 className="text-end underline mr-8">
-				<Link to="/search" className="findmore">
-					More
-				</Link>
-			</h2>
-
-			<main className="flex gap-4 justify-center items-center mt-4">
+			<h1 className="text-bold text-center mt-20 text-[#832729] tracking-wide text-4xl">
+				New Arrivals
+			</h1>
+			<p className="text-center mt-2 font-light">
+				This season's most loved, customer favorite designs - curated just for
+				you!
+			</p>
+			<img src={LineDesign} className="svg-icon" alt="Line Design SVG" />{" "}
+			{/* <main className="flex gap-6 justify-between items-center px-28 mb-28">
 				{isLoading ? (
 					<Skeleton width="80vw" />
 				) : (
@@ -68,6 +75,33 @@ const Home = () => {
 						/>
 					))
 				)}
+			</main> */}
+			<main>
+			<Carousel>
+          <CarouselContent className="flex gap-6 justify-between items-center px-28 mb-28">
+            {data?.products.map((item, index) => (
+              index % 4 === 0 && (
+                <CarouselItem key={item._id}>
+                  <div className="grid grid-cols-4 gap-4">
+                    {data.products.slice(index, index + 4).map((prod) => (
+                      <ProductCard
+                        key={prod._id}
+                        productId={prod._id}
+                        name={prod.name}
+                        price={prod.price}
+                        stock={prod.stock}
+                        handler={addToCartHandler}
+                        photo={prod.photo}
+                      />
+                    ))}
+                  </div>
+                </CarouselItem>
+              )
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="absolute left-32 top-1/3 transform -translate-y-1/2"/>
+          <CarouselNext className="absolute right-32 top-1/3 transform -translate-y-1/2"/>
+        </Carousel>
 			</main>
 			<div className="section-3 flex h-full p-8 gap-8 ">
 				<div className="col-1 h-full w-2/4">
@@ -92,6 +126,20 @@ const Home = () => {
 							alt=""
 						/>
 					</div>
+				</div>
+			</div>
+			<div className="flex flex-row justify-center items-center p-8 h-[550px] ">
+				<div className="video-container h-full ">
+					<video autoPlay loop muted className="video-player h-full w-full">
+						<source
+							src="https://www.w3schools.com/html/mov_bbb.mp4"
+							type="video/mp4"
+						/>
+					</video>
+				</div>
+				<div className="flex flex-col justify-center items-center gap-4 p-8 h-full bg-[#F1F1F1] rounded-lg">
+					<h1 className="tracking-widest text-3xl">JUST ARRIVED</h1>
+					<h1 className="tracking-wide text-6xl font-serif">Dancing Hoops</h1>
 				</div>
 			</div>
 		</div>

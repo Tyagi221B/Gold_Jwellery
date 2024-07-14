@@ -130,7 +130,7 @@ const Search = () => {
 
 			{/* Products section  */}
 			<main className="w-full py-8 px h-full ">
-				<h1 className="tracking-wider font-bold uppercase text-[#a12022] text-2xl">Products</h1>
+				<h1 className="tracking-wider font-bold uppercase text-[#a12022] text-xl">Products</h1>
 				{category && category ? (
 					<div className="uppercase bg-red-50 rounded-full w-fit px-4 py-2 mb-6 mt-4 flex flex-row items-center justify-between gap-4">
 						{category}
@@ -141,7 +141,7 @@ const Search = () => {
 					</div>
 				) : (
 					<input
-						className="w-1/2 p-4 rounded-md m-4 text-xl block"
+						className="w-1/2 p-4 rounded-lg m-4 text-xl block border-b border-[#832729]"
 						type="text"
 						placeholder="Search by name..."
 						value={search}
@@ -152,7 +152,7 @@ const Search = () => {
 				{productLoading ? (
 					<Skeleton length={10} />
 				) : (
-					<div className="search-product-list flex flex-row justify-start items-start flex-wrap h-full overflow-y-auto gap-4">
+					<div className="search-product-list flex flex-row justify-start items-start flex-wrap h-full overflow-y-auto gap-6">
 						{searchedData?.products.map((i) => (
 							<ProductCard
 								key={i._id}

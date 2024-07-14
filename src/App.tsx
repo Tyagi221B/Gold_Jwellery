@@ -65,7 +65,7 @@ const App = () => {
 			<Suspense fallback={<Loader />}>
 				<Routes>
 					<Route path="/" element={<Home />} />
-					<Route path="/product:id" element={<ProductPage />} />
+					<Route path="/product/:id" element={<ProductPage />} />
 					<Route path="/search" element={<Search />} />
 					<Route path="/cart" element={<Cart />} />
 					{/* Not logged In Route */}
@@ -120,8 +120,9 @@ const App = () => {
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</Suspense>
-			<Toaster position="bottom-center" />
 			<Footer/>
+
+			<Toaster position="bottom-center" />
 		</Router>
 	);
 };

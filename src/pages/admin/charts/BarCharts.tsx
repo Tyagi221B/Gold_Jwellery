@@ -25,15 +25,17 @@ const Barcharts = () => {
   }
 
   return (
-    <div className="admin-container">
-      <AdminSidebar />
-      <main className="chart-container">
-        <h1>Bar Charts</h1>
+    <div className="admin-container flex bg-[#f7f7f7] h-screen">
+      <div className="w-1/6">
+				<AdminSidebar />
+			</div>
+      <main className="chart-container w-5/6 ml-auto mr-auto bg-white p-16 overflow-y-auto">
+        <h1 className="mb-20 ml-8">Bar Charts</h1>
         {isLoading ? (
           <Skeleton length={20} />
         ) : (
           <>
-            <section>
+            <section className="w-10/12 my-16 mx-auto">
               <BarChart
                 data_1={products}
                 data_2={users}
@@ -43,10 +45,10 @@ const Barcharts = () => {
                 bgColor_1={`hsl(260, 50%, 30%)`}
                 bgColor_2={`hsl(360, 90%, 90%)`}
               />
-              <h2>Top Products & Top Customers</h2>
+              <h2 className="my-8 mx-0 text-center font-bold uppercase tracking-wider">Top Products & Top Customers</h2>
             </section>
 
-            <section>
+            <section className="w-10/12 my-16 mx-auto">
               <BarChart
                 horizontal={true}
                 data_1={orders}
@@ -57,7 +59,7 @@ const Barcharts = () => {
                 bgColor_2=""
                 labels={last12Months}
               />
-              <h2>Orders throughout the year</h2>
+              <h2 className="my-8 mx-0 text-center font-bold uppercase tracking-wider">Orders throughout the year</h2>
             </section>
           </>
         )}

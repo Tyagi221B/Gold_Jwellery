@@ -63,9 +63,11 @@ const NewProduct = () => {
 	};
 
 	return (
-		<div className="admin-container">
-			<AdminSidebar />
-			<main className="product-management flex flex-row justify-center p-16">
+		<div className="admin-container flex bg-[#f7f7f7] h-screen">
+			<div className="w-1/6">
+				<AdminSidebar />
+			</div>
+			<main className="product-management flex flex-row justify-center p-16  w-5/6">
 				<article className="h-full p-8 w-full max-w-[400px] bg-white rounded-md shadow-sm shadow-black">
 					<form  
 					className="flex flex-col items-center gap-8"
@@ -107,7 +109,7 @@ const NewProduct = () => {
 							<input className="w-full p-4 border border-black rounded-md"
 								required
 								type="text"
-								placeholder="eg. laptop, camera etc"
+								placeholder="Chain, Earing, Necklace, Bracelette"
 								value={category}
 								onChange={(e) => setCategory(e.target.value)}
 							/>
