@@ -50,10 +50,10 @@ const NewProduct = () => {
 		formData.set("category", category);
 		formData.set("description", description);
 
-		// for (const [key, value] of formData.entries()) {
-		// 	console.log(`${key}: ${value}`);
-		// }
-		// console.log(formData.get("description"));
+		for (const [key, value] of formData.entries()) {
+			console.log(`${key}: ${value}`);
+		}
+		console.log(formData.get("description"));
 
 
 		const res = await newProduct({ id: user?._id, formData });

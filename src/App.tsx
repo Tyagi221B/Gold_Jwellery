@@ -11,6 +11,7 @@ import { getUser } from "./redux/api/userAPI";
 import { userExist, userNotExist } from "./redux/reducer/userReducer";
 import { RootState } from "./redux/store";
 import Footer from "./components/Footer";
+import ProductPage from "./components/ProductPage";
 
 const Home = lazy(() => import("./pages/Home"));
 const Search = lazy(() => import("./pages/search"));
@@ -64,6 +65,7 @@ const App = () => {
 			<Suspense fallback={<Loader />}>
 				<Routes>
 					<Route path="/" element={<Home />} />
+					<Route path="/product:id" element={<ProductPage />} />
 					<Route path="/search" element={<Search />} />
 					<Route path="/cart" element={<Cart />} />
 					{/* Not logged In Route */}
