@@ -19,19 +19,22 @@ const Productmanagement = () => {
 	const navigate = useNavigate();
 
 	const { data, isLoading, isError } = useProductDetailsQuery(params.id!);
+	// console.log(data);
 
-	const { price, photo, name, stock, category } = data?.product || {
+	const { price, photo, name, stock, category, description } = data?.product || {
 		photo: "",
 		category: "",
 		name: "",
 		stock: 0,
 		price: 0,
+		description: "",
 	};
 
 	const [priceUpdate, setPriceUpdate] = useState<number>(price);
 	const [stockUpdate, setStockUpdate] = useState<number>(stock);
 	const [nameUpdate, setNameUpdate] = useState<string>(name);
 	const [categoryUpdate, setCategoryUpdate] = useState<string>(category);
+	const [descriptionUpdate, setdescriptionUpdate] = useState<string>(description);
 	const [photoUpdate, setPhotoUpdate] = useState<string>("");
 	const [photoFile, setPhotoFile] = useState<File>();
 
@@ -65,6 +68,7 @@ const Productmanagement = () => {
 			formData.set("stock", stockUpdate.toString());
 		if (photoFile) formData.set("photo", photoFile);
 		if (categoryUpdate) formData.set("category", categoryUpdate);
+		if (descriptionUpdate) formData.set("category", descriptionUpdate);
 
 		const res = await updateProduct({
 			formData,
@@ -90,6 +94,7 @@ const Productmanagement = () => {
 			setPriceUpdate(data.product.price);
 			setStockUpdate(data.product.stock);
 			setCategoryUpdate(data.product.category);
+			setdescriptionUpdate(data.product.description);
 		}
 	}, [data]);
 
@@ -171,6 +176,18 @@ const Productmanagement = () => {
 										placeholder="eg. laptop, camera etc"
 										value={categoryUpdate}
 										onChange={(e) => setCategoryUpdate(e.target.value)}
+									/>
+								</div>
+
+								{/* Description of product. */}
+								<div className="w-full relative">
+									<label className="absolute left-0 -top-6">Description</label>
+									<input
+										className="w-full p-4 border border-black rounded-md"
+										type="text"
+										placeholder="eg. laptop, camera etc"
+										value={descriptionUpdate}
+										onChange={(e) => setdescriptionUpdate(e.target.value)}
 									/>
 								</div>
 

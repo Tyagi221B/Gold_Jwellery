@@ -14,7 +14,7 @@ return (
                             </div>
                             <div>
                                 <p className="text-sm text-[#832729]">
-                                    &copy; Copyright 2023. All Rights Reserved by Asmittyagi.
+                                    &copy; Copyright 2024. All Rights Reserved by GK Fintech.
                                 </p>
                             </div>
                         </div>

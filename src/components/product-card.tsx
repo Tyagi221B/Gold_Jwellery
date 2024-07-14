@@ -21,8 +21,9 @@ const ProductCard = ({
   handler,
 }: ProductsProps) => {
   return (
-    <div className="product-card flex flex-col border border-gray-300 p-3 rounded-md min-w-60 max-w-64">
-      <img className="h-56 max-w-56 min-w-56" src={`${server}/${photo}`} alt={name} />
+    <div className="product-card flex flex-col border border-[#e1e1e1] p-2 rounded-md min-w-60 max-w-60 gap-4">
+      <img className="h-56 max-w-56 min-w-56 object-cover" src={`${server}/${photo}`} alt={name} />
+      <div>
       <p className="whitespace-nowrap overflow-hidden overflow-ellipsis">{name}</p>
       <span>₹{price}</span>
 
@@ -36,6 +37,8 @@ const ProductCard = ({
           Add to Cart <FaPlus />
         </button>
       </div>
+      </div>
+      
     </div>
   );
 };

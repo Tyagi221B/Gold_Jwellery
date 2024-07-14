@@ -69,7 +69,7 @@ const Home = () => {
 					))
 				)}
 			</main>
-			<div className="section-3 flex h-full p-8 gap-8">
+			<div className="section-3 flex h-full p-8 gap-8 ">
 				<div className="col-1 h-full w-2/4">
 					<img
 						className="h-full w-full"

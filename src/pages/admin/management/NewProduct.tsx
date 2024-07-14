@@ -15,6 +15,7 @@ const NewProduct = () => {
 	const [stock, setStock] = useState<number>(1);
 	const [photoPrev, setPhotoPrev] = useState<string>("");
 	const [photo, setPhoto] = useState<File>();
+	const [description, setDescription] = useState<string>("");
 
 	const [newProduct] = useNewProductMutation();
 	const navigate = useNavigate();
@@ -38,7 +39,7 @@ const NewProduct = () => {
 	const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		if (!name || !price || stock < 0 || !category || !photo) return;
+		if (!name || !price || stock < 0 || !category || !photo || !description) return;
 
 		const formData = new FormData();
 
@@ -47,8 +48,16 @@ const NewProduct = () => {
 		formData.set("stock", stock.toString());
 		formData.set("photo", photo);
 		formData.set("category", category);
+		formData.set("description", description);
 
-		const res = await newProduct({ id: user?._id!, formData });
+		// for (const [key, value] of formData.entries()) {
+		// 	console.log(`${key}: ${value}`);
+		// }
+		// console.log(formData.get("description"));
+
+
+		const res = await newProduct({ id: user?._id, formData });
+		
 
 		responseToast(res, navigate, "/admin/product");
 	};
@@ -101,6 +110,16 @@ const NewProduct = () => {
 								placeholder="eg. laptop, camera etc"
 								value={category}
 								onChange={(e) => setCategory(e.target.value)}
+							/>
+						</div>
+						<div className="w-full relative">
+							<label className="absolute left-0 -top-6">Description</label>
+							<input className="w-full p-4 border border-black rounded-md"
+								required
+								type="text"
+								placeholder="Add about this product"
+								value={description}
+								onChange={(e) => setDescription(e.target.value)}
 							/>
 						</div>
 
