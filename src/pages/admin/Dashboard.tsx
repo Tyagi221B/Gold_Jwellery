@@ -27,11 +27,11 @@ const Dashboard = () => {
 	if (isError) return <Navigate to={"/"} />;
 
 	return (
-		<div className="admin-container flex bg-[#f7f7f7] h-screen">
+		<div className="admin-container flex bg-[#f7f7f7] h-full">
 			<div className="w-1/6">
 				<AdminSidebar />
 			</div>
-			<main className="dashboard w-5/6 ml-auto mr-auto">
+			<main className="dashboard w-5/6 ml-auto mr-auto px-6">
 				{isLoading ? (
 					<Skeleton length={20} />
 				) : (
@@ -54,7 +54,7 @@ const Dashboard = () => {
 						{/* Widget Section */}
 						{/* Row One */}
 
-						<section className="widget-container flex flex-row justify-between items-stretch gap-8 pt-8 pr-8 pb-8 pl-8">
+						<section className="widget-container flex flex-row justify-between items-stretch gap-6 pt-8 mb-16">
 							<WidgetItem
 								percent={stats.changePercent.revenue}
 								amount={true}

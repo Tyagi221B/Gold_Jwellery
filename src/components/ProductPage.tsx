@@ -1,7 +1,7 @@
 import { useProductDetailsQuery } from "@/redux/api/productAPI";
 import { RootState, server } from "@/redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Skeleton } from "./loader";
 import { CartItem } from "@/types/types";
 import toast from "react-hot-toast";
@@ -11,7 +11,6 @@ const ProductPage = () => {
 	const { user } = useSelector((state: RootState) => state.userReducer);
 
 	const params = useParams();
-	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	const { data, isLoading } = useProductDetailsQuery(params.id!);

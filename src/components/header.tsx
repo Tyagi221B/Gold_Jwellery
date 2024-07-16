@@ -1,6 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { FaSearch, FaSignInAlt, FaUser, FaSignOutAlt } from "react-icons/fa";
-import { useState } from "react";
+import { FaSearch, FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 import { User } from "../types/types";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
@@ -22,7 +21,6 @@ interface PropsType {
 }
 
 const Header = ({ user }: PropsType) => {
-	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const { data: categoriesResponse, isLoading: loadingCategories } =
 		useCategoriesQuery("");
 
@@ -30,7 +28,6 @@ const Header = ({ user }: PropsType) => {
 		try {
 			await signOut(auth);
 			toast.success("Sign Out Successfully");
-			setIsOpen(false);
 		} catch (error) {
 			toast.error("Sign Out Fail");
 		}
@@ -46,8 +43,8 @@ const Header = ({ user }: PropsType) => {
 
 	return (
 		<div className="w-full flex flex-wrap justify-center">
-			<nav className="flex bg-[#F2E9E9] w-full justify-center gap-10 h-16 items-center">
-				<Link onClick={() => setIsOpen(false)} to={"/"}>
+			<nav className="flex bg-[#f2e9e9] w-full justify-center gap-10 h-16 items-center">
+				<Link to={"/"}>
 					<div className="bg-white rounded-full p-3 text-2xl">
 						<IoLogoGoogle />
 					</div>
@@ -62,12 +59,11 @@ const Header = ({ user }: PropsType) => {
 				</div>
 				<Link
 					className="flex items-center gap-16 bg-white rounded-md pr-2 pl-2 pt-2 pb-2"
-					onClick={() => setIsOpen(false)}
 					to={"/search"}
 				>
 					Search <FaSearch />
 				</Link>
-				<Link onClick={() => setIsOpen(false)} to={"/cart"}>
+				<Link to={"/cart"}>
 					<HiShoppingCart />
 				</Link>
 				{user?._id ? (
@@ -91,7 +87,6 @@ const Header = ({ user }: PropsType) => {
 									{" "}
 									{user.role === "admin" && (
 										<Link
-											onClick={() => setIsOpen(false)}
 											to="/admin/dashboard"
 										>
 											Admin
