@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/v1/(.*)",
+      "destination": "https://gk-jweller-gold-website-july-2024.onrender.com"
+    }
+  ]
+}
+
