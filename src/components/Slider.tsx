@@ -5,15 +5,34 @@ import { server } from "@/redux/store";
 import { useNavigate } from "react-router-dom";
 import { useLatestProductsQuery } from "@/redux/api/productAPI";
 import toast from "react-hot-toast";
+import { MouseEventHandler } from "react";
 
+export type TSliderSimpleProps = {
+	alt?:string;
+	arrows?:boolean;
+	className?:string;
+	dots?: boolean;
+	fade?: boolean;
+	height?:string;
+	images?: string[];
+	infinite?: boolean;
+	nextArrow?: JSX.Element;
+	prevArrow?: JSX.Element;
+	slidesToScroll?: number;
+	swipeToSlide?: boolean;
+	slidesToShow?: number;
+	speed?: number;
+	style?: React.CSSProperties;
+	onClick?: MouseEventHandler<HTMLDivElement>
 
+}
 
 export const SwipeToSlide = () => {
 	const { data, isError } = useLatestProductsQuery("");
 	if (isError) toast.error("Cannot Fetch the Products");
 	const navigate = useNavigate();
 
-  function SampleNextArrow(props) {
+  function SampleNextArrow(props: TSliderSimpleProps) {
     const { className, style, onClick } = props;
     return (
       <div
@@ -24,7 +43,7 @@ export const SwipeToSlide = () => {
     );
   }
   
-  function SamplePrevArrow(props) {
+  function SamplePrevArrow(props : TSliderSimpleProps) {
     const { className, style, onClick } = props;
     return (
       <div
