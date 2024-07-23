@@ -4,13 +4,16 @@ import { Link } from 'react-router-dom'
     
 function Footer() {
 return (
-    <div className="overflow-hidden py-10 bg-[#F2E9E9]  border-t-2 border-t-[#F2E9E9] mt-28 relative">
+    <div className="overflow-hidden py-10 bg-[#f0eee4]  border-t-2 border-t-[#F2E9E9] mt-28 relative">
             <div className="relative z-10 mx-auto max-w-7xl px-4">
                 <div className="-m-6 flex flex-wrap">
                     <div className="w-full p-6 md:w-1/2 lg:w-5/12">
                         <div className="flex h-full flex-col justify-between">
                             <div className="mb-4 inline-flex items-center text-[#832729] font-bold text-4xl">
-                                {/* <Logo width="100px" /> */}LOGO
+                            <img 
+                            className='w-60 rounded-md'
+							src="https://res.cloudinary.com/tubenest/image/upload/v1721716205/WhatsApp_Image_2024-07-16_at_16.17.06_lg6ess.jpg"
+                            alt="" />
                             </div>
                             <div>
                                 <p className="text-sm text-[#832729]">

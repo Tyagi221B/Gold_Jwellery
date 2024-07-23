@@ -1,34 +1,13 @@
-import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
-import ProductCard from "../components/product-card";
-import { useLatestProductsQuery } from "../redux/api/productAPI";
-import { addToCart } from "../redux/reducer/cartReducer";
-import { CartItem, CategoryType } from "../types/types";
+import { CategoryType } from "../types/types";
 import ImageSlider from "../components/ImageSlider";
 import LineDesign from "../assets/Line-Design.svg";
-import {
-	Carousel,
-	CarouselContent,
-	CarouselItem,
-	CarouselNext,
-	CarouselPrevious,
-} from "../@/components/ui/carousel";
 import CategoryCard from "@/components/CategoryCard";
 import { useAllCategoryQuery } from "@/redux/api/categoryAPI";
+import SwipeToSlide from "@/components/Slider";
 
 const Home = () => {
-	const { data, isError } = useLatestProductsQuery("");
 	const { data: categoryResponse } = useAllCategoryQuery("");
 
-	const dispatch = useDispatch();
-
-	const addToCartHandler = (cartItem: CartItem) => {
-		if (cartItem.stock < 1) return toast.error("Out of Stock");
-		dispatch(addToCart(cartItem));
-		toast.success("Added to cart");
-	};
-
-	if (isError) toast.error("Cannot Fetch the Products");
 	const banner1 =
 		"https://www.tanishq.co.in/dw/image/v2/BKCK_PRD/on/demandware.static/-/Library-Sites-TanishqSharedLibrary/default/dwca95c924/homepage/HeroBanner/glamdays-desktop.png";
 	const banner2 =
@@ -64,37 +43,12 @@ const Home = () => {
 				</p>
 				<img src={LineDesign} className="svg-icon" alt="Line Design SVG" />
 				<main>
-					<Carousel>
-						<CarouselContent className="flex gap-6 justify-between items-center px-28 mb-28">
-							{data?.products.map(
-								(item, index) =>
-									index % 4 === 0 && (
-										<CarouselItem key={item._id}>
-											<div className="grid grid-cols-4 gap-4">
-												{data.products.slice(index, index + 4).map((prod) => (
-													<ProductCard
-														key={prod._id}
-														productId={prod._id}
-														name={prod.name}
-														price={prod.price}
-														stock={prod.stock}
-														handler={addToCartHandler}
-														photo={prod.photo}
-													/>
-												))}
-											</div>
-										</CarouselItem>
-									)
-							)}
-						</CarouselContent>
-						<CarouselPrevious className="absolute left-32 top-1/3 transform -translate-y-1/2" />
-						<CarouselNext className="absolute right-32 top-1/3 transform -translate-y-1/2" />
-					</Carousel>
+					<SwipeToSlide/>
 				</main>
 			</div>
 
-			<div className="shop_by_category">
-				<h1 className="text-bold text-center mt-16 text-[#832729] tracking-wide text-4xl">
+			<div className="shop_by_category mt-52">
+				<h1 className="text-bold text-center text-[#832729] tracking-wide text-4xl">
 					Shop By Category
 				</h1>
 				<p className="text-center mt-2 font-light">

@@ -132,7 +132,7 @@ const Search = () => {
 			<main className="w-full py-8 px h-full ">
 				<h1 className="tracking-wider font-bold uppercase text-[#832729] text-xl">Products</h1>
 				{category && category ? (
-					<div className="uppercase bg-red-50 rounded-full w-fit px-4 py-2 mb-6 mt-4 flex flex-row items-center justify-between gap-4">
+					<div className="uppercase bg-[#f0eee4] rounded-full w-fit px-4 py-2 mb-6 mt-4 flex flex-row items-center justify-between gap-4">
 						{category}
             <button onClick={()=> setCategory("")}>
             <RxCross2 />

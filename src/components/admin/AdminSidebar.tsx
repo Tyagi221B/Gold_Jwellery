@@ -30,7 +30,7 @@ const AdminSidebar = () => {
 	return (
 		<div className="">
 		{phoneActive && (
-        <button id="hamburger" onClick={() => setShowModal(true)}>
+        <button className="hamburger grid place-items-center h-12 w-12 border-none cursor-pointer text-[#2c68ff] fixed top-4 left-4 text-3xl bg-white rounded-[50%] z-[9]" onClick={() => setShowModal(true)}>
           <HiMenuAlt4 />
         </button>
       )}
@@ -54,7 +54,7 @@ const AdminSidebar = () => {
       <SubSectionThree location={location} />
 
 			{phoneActive && (
-          <button id="close-sidebar" onClick={() => setShowModal(false)}>
+          <button className="close-sidebar w-[80%] my-4 mx-auto block p-3 border-none outline-none cursor-pointer text-white rounded-lg " onClick={() => setShowModal(false)}>
             Close
           </button>
         )}

@@ -5,6 +5,7 @@ import AdminSidebar from "../../../components/admin/AdminSidebar";
 import { useNewProductMutation } from "../../../redux/api/productAPI";
 import { RootState } from "../../../redux/store";
 import { responseToast } from "../../../utils/features";
+import { useNewCategoryMutation } from "@/redux/api/categoryAPI";
 
 const NewProduct = () => {
 	const { user } = useSelector((state: RootState) => state.userReducer);
@@ -18,6 +19,7 @@ const NewProduct = () => {
 	const [description, setDescription] = useState<string>("");
 
 	const [newProduct] = useNewProductMutation();
+	const [newCategory] = useNewCategoryMutation();
 	const navigate = useNavigate();
 
 	const changeImageHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -42,6 +44,7 @@ const NewProduct = () => {
 		if (!name || !price || stock < 0 || !category || !photo || !description) return;
 
 		const formData = new FormData();
+		const cateforyFormData = new FormData();
 
 		formData.set("name", name);
 		formData.set("price", price.toString());
@@ -50,15 +53,21 @@ const NewProduct = () => {
 		formData.set("category", category);
 		formData.set("description", description);
 
+		cateforyFormData.set("name", category)
+		cateforyFormData.set("photo", photo);
+
 		for (const [key, value] of formData.entries()) {
 			console.log(`${key}: ${value}`);
 		}
 		console.log(formData.get("description"));
 
 		const res = await newProduct({ id: user?._id || "", formData });
-		
+
+		// adding new category to the database
+		await newCategory({ id: user?._id || "", cateforyFormData });
 
 		responseToast(res, navigate, "/admin/product");
+
 	};
 
 	return (

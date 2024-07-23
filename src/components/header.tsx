@@ -43,7 +43,7 @@ const Header = ({ user }: PropsType) => {
 
 	return (
 		<div className="w-full flex flex-wrap justify-center">
-			<nav className="flex bg-[#f2e9e9] w-full justify-between gap-10 h-16 items-center px-10">
+			<nav className="flex bg-[#f0eee4] w-full justify-between gap-10 h-16 items-center px-10">
 				<Link to={"/"}>
 					<div className="bg-white rounded-full text-2xl ">
 						<img
