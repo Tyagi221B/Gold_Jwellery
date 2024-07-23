@@ -128,3 +128,9 @@ export type Line = {
   discount: number[];
   revenue: number[];
 };
+
+export type CategoryType = {
+  name: string;
+  _id: string;
+  photo:string;
+}

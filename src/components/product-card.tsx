@@ -20,13 +20,16 @@ const ProductCard = ({ productId, price, name, photo }: ProductsProps) => {
 	return (
 		<div
 			onClick={navigateToProductPage}
-			className="product-card cursor-pointer flex flex-col border border-[#e1e1e1] p-2 max-w-68 gap-4"
+			className="group my-10 flex w-full max-w-xs flex-col overflow-hidden border border-gray-100 bg-white shadow-md gap-4 p-4 cursor-pointer"
 		>
+			<div className="relative flex h-60 overflow-hidden">
+
 			<img
-				className="object-cover h-64 min-w-68 max-w-68"
+				className="absolute top-0 right-0 h-full w-full object-cover "
 				src={`${server}/${photo}`}
 				alt={name}
 			/>
+			</div>
 			<div>
 				<p className="whitespace-nowrap overflow-hidden overflow-ellipsis text-xs mb-1">
 					{name}

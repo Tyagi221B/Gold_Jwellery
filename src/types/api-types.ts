@@ -90,6 +90,10 @@ export type NewProductRequest = {
   id: string;
   formData: FormData;
 };
+export type NewCategoryResponse = {
+  id: string;
+  cateforyFormData: FormData;
+};
 export type UpdateProductRequest = {
   userId: string;
   productId: string;

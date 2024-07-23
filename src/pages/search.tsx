@@ -130,7 +130,7 @@ const Search = () => {
 
 			{/* Products section  */}
 			<main className="w-full py-8 px h-full ">
-				<h1 className="tracking-wider font-bold uppercase text-[#a12022] text-xl">Products</h1>
+				<h1 className="tracking-wider font-bold uppercase text-[#832729] text-xl">Products</h1>
 				{category && category ? (
 					<div className="uppercase bg-red-50 rounded-full w-fit px-4 py-2 mb-6 mt-4 flex flex-row items-center justify-between gap-4">
 						{category}
@@ -141,7 +141,7 @@ const Search = () => {
 					</div>
 				) : (
 					<input
-						className="w-1/2 p-4 rounded-lg m-4 text-xl block border-b border-[#832729]"
+						className="w-1/2 p-4 rounded-lg m-4 block border-b border-[#832729] outline-none"
 						type="text"
 						placeholder="Search by name..."
 						value={search}

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import ProductCard from "../components/product-card";
 import { useLatestProductsQuery } from "../redux/api/productAPI";
 import { addToCart } from "../redux/reducer/cartReducer";
-import { CartItem } from "../types/types";
+import { CartItem, CategoryType } from "../types/types";
 import ImageSlider from "../components/ImageSlider";
 import LineDesign from "../assets/Line-Design.svg";
 import {
@@ -13,9 +13,12 @@ import {
 	CarouselNext,
 	CarouselPrevious,
 } from "../@/components/ui/carousel";
+import CategoryCard from "@/components/CategoryCard";
+import { useAllCategoryQuery } from "@/redux/api/categoryAPI";
 
 const Home = () => {
 	const { data, isError } = useLatestProductsQuery("");
+	const { data: categoryResponse } = useAllCategoryQuery("");
 
 	const dispatch = useDispatch();
 
@@ -47,61 +50,68 @@ const Home = () => {
 
 	return (
 		<div className="home">
-			<div className="w-full">
+			<div className="Banner_Slider w-full">
 				<ImageSlider images={IMAGES} />
 			</div>
-			<h1 className="text-bold text-center mt-20 text-[#832729] tracking-wide text-4xl">
-				New Arrivals
-			</h1>
-			<p className="text-center mt-2 font-light">
-				This season's most loved, customer favorite designs - curated just for
-				you!
-			</p>
-			<img src={LineDesign} className="svg-icon" alt="Line Design SVG" />{" "}
-			{/* <main className="flex gap-6 justify-between items-center px-28 mb-28">
-				{isLoading ? (
-					<Skeleton width="80vw" />
-				) : (
-					data?.products.map((i) => (
-						<ProductCard
-							key={i._id}
-							productId={i._id}
-							name={i.name}
-							price={i.price}
-							stock={i.stock}
-							handler={addToCartHandler}
-							photo={i.photo}
-						/>
-					))
-				)}
-			</main> */}
-			<main>
-			<Carousel>
-          <CarouselContent className="flex gap-6 justify-between items-center px-28 mb-28">
-            {data?.products.map((item, index) => (
-              index % 4 === 0 && (
-                <CarouselItem key={item._id}>
-                  <div className="grid grid-cols-4 gap-4">
-                    {data.products.slice(index, index + 4).map((prod) => (
-                      <ProductCard
-                        key={prod._id}
-                        productId={prod._id}
-                        name={prod.name}
-                        price={prod.price}
-                        stock={prod.stock}
-                        handler={addToCartHandler}
-                        photo={prod.photo}
-                      />
-                    ))}
-                  </div>
-                </CarouselItem>
-              )
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="absolute left-32 top-1/3 transform -translate-y-1/2"/>
-          <CarouselNext className="absolute right-32 top-1/3 transform -translate-y-1/2"/>
-        </Carousel>
-			</main>
+
+			<div className="New_Arrival">
+				<h1 className="text-bold text-center mt-20 text-[#832729] tracking-wide text-4xl">
+					New Arrivals
+				</h1>
+				<p className="text-center mt-2 font-light">
+					This season's most loved, customer favorite designs - curated just for
+					you!
+				</p>
+				<img src={LineDesign} className="svg-icon" alt="Line Design SVG" />
+				<main>
+					<Carousel>
+						<CarouselContent className="flex gap-6 justify-between items-center px-28 mb-28">
+							{data?.products.map(
+								(item, index) =>
+									index % 4 === 0 && (
+										<CarouselItem key={item._id}>
+											<div className="grid grid-cols-4 gap-4">
+												{data.products.slice(index, index + 4).map((prod) => (
+													<ProductCard
+														key={prod._id}
+														productId={prod._id}
+														name={prod.name}
+														price={prod.price}
+														stock={prod.stock}
+														handler={addToCartHandler}
+														photo={prod.photo}
+													/>
+												))}
+											</div>
+										</CarouselItem>
+									)
+							)}
+						</CarouselContent>
+						<CarouselPrevious className="absolute left-32 top-1/3 transform -translate-y-1/2" />
+						<CarouselNext className="absolute right-32 top-1/3 transform -translate-y-1/2" />
+					</Carousel>
+				</main>
+			</div>
+
+			<div className="shop_by_category">
+				<h1 className="text-bold text-center mt-16 text-[#832729] tracking-wide text-4xl">
+					Shop By Category
+				</h1>
+				<p className="text-center mt-2 font-light">
+					Browse through your favorite categories. We've got them all!
+				</p>
+				<img src={LineDesign} className="svg-icon" alt="Line Design SVG" />
+
+				<div className="flex gap-6 justify-between items-center px-28 mb-28">
+					
+					{categoryResponse?.categories.map((i: CategoryType) => (
+						<div className="">
+						<CategoryCard name={i.name} photo={i.photo} />
+						</div>
+					))}
+				</div>
+			</div>
+
 			<div className="section-3 flex h-full p-8 gap-8 ">
 				<div className="col-1 h-full w-2/4">
 					<img
@@ -127,6 +137,7 @@ const Home = () => {
 					</div>
 				</div>
 			</div>
+
 			<div className="flex flex-row justify-center items-center p-8 h-[550px] ">
 				<div className="video-container h-full ">
 					<video autoPlay loop muted className="video-player h-full w-full">
