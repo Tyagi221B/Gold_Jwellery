@@ -81,11 +81,11 @@ const Cart = () => {
 	}, [cartItems]);
 
 	return (
-		<div className="cart py-8 px-16 flex flex-row gap-16 h-full">
-			<section className=" relative z-10">
+		<div className="cart py-8 px-16 flex flex-row gap-4 h-full">
+			<section className=" relative z-10 w-8/12">
 				<div className="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto relative z-10">
 					<div className="grid ">
-						<div className="xl:col-span-8 lg:pr-8 pt-14 pb-8 lg:py-24 w-full max-xl:max-w-3xl max-xl:mx-auto">
+						<div className="pb-8 lg:py-16 w-full max-xl:max-w-3xl max-xl:mx-auto">
 							<div className="flex items-center justify-between pb-8 border-b border-gray-300">
 								<h2 className="font-manrope font-bold text-3xl leading-10 text-black">
 									Shopping Cart
@@ -258,19 +258,27 @@ const Cart = () => {
 				</div>
 			</section>
 
-			<aside className="w-4/12 p-16 flex flex-col justify-center items-stretch gap-6">
-				<p className="text-xl">Subtotal: ₹{subtotal}</p>
-				<p className="text-xl">Shipping Charges: ₹{shippingCharges}</p>
-				<p className="text-xl">Tax: ₹{tax}</p>
-				<p className="text-xl">
-					Discount: <em className="red"> - ₹{discount}</em>
-				</p>
-				<p className="text-xl">
-					<b>Total: ₹{total}</b>
-				</p>
-
+			<aside className="w-4/12 p-8 flex flex-col justify-center items-stretch gap-6 h-fit">
+			<div className="mt-6 h-full rounded-lg border bg-white p-6 shadow-md w-full">
+        <div className="mb-2 flex justify-between">
+          <p className="text-gray-700">Subtotal</p>
+          <p className="text-gray-700">₹ {subtotal}</p>
+        </div>
+        <div className="flex justify-between">
+          <p className="text-gray-700">Shipping</p>
+          <p className="text-gray-700">₹ {shippingCharges}</p>
+        </div>
+        <div className="flex justify-between">
+          <p className="text-gray-700">Tax</p>
+          <p className="text-gray-700">₹ {tax}</p>
+        </div>
+        <div className="flex justify-between">
+          <p className="text-gray-700">Discount</p>
+          <p className="text-gray-700"><em className="red"> - ₹{discount}</em></p>
+        </div>
+        <hr className="my-4" />
 				<input
-					className="p-4 border border-black outline-none rounded-md mt-8"
+					className="block w-full h-11 text-base font-normal shadow-xs text-gray-900 bg-white border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-gray-400 px-4"
 					type="text"
 					placeholder="Coupon Code"
 					value={couponCode}
@@ -284,22 +292,32 @@ const Cart = () => {
 							<code className="font-extrabold self-end">{couponCode}</code>
 						</span>
 					) : (
-						<span className="red -mt-4 flex flex-row justify-center items-center gap-1">
+						<span className="text-red-500 mt-4 flex flex-row justify-center items-center gap-1">
 							Invalid Coupon <VscError />
 						</span>
 					))}
-
+        <hr className="my-4" />
+        <div className="flex justify-between">
+          <p className="text-lg font-bold">Total</p>
+          <div className="">
+            <p className="mb-1 text-lg font-bold">₹ {total}</p>
+            <p className="text-sm text-gray-700">including VAT</p>
+          </div>
+        </div>
+				<button className="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600">
 				{cartItems.length > 0 && (
 					<Link
-						className={`${
-							!user && "bg-gray-300"
-						} bg-[#2e2e2e] p-4 no-underline text-white flex flex-row justify-center items-center gap-4 uppercase tracking-wider rounded-md hover:opacity-80`}
+						className=""
 						to={`${!user ? "/login" : "/shipping"}`}
 					>
 						Checkout
 					</Link>
 				)}
+				</button>
+				
+      </div>
 			</aside>
+			
 		</div>
 	);
 };
