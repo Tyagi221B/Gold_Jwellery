@@ -59,7 +59,7 @@ const Home = () => {
 				<div className="flex gap-6 justify-between items-center px-28 mb-28">
 					
 					{categoryResponse?.categories.map((i: CategoryType) => (
-						<div className="">
+						<div key={i._id} className="">
 						<CategoryCard name={i.name} photo={i.photo} />
 						</div>
 					))}

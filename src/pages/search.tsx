@@ -68,8 +68,8 @@ const Search = () => {
 		toast.error(err.data.message);
 	}
 	return (
-		<div className="product-search-page p-8 flex flex-row justify-start items-stretch gap-8 min-h-96">
-			<aside className="min-w-80 border-l border-[#d17677] shad p-8 flex flex-col justify-start items-stretch gap-2 rounded-3xl">
+		<div className="product-search-page p-8 flex flex-row justify-start items-stretch gap-8 min-h-96 ">
+			<aside className="min-w-80 border-l border-[#d17677] shad p-8 flex flex-col justify-start items-stretch gap-2 rounded-3xl h-fit sticky top-16">
 					<h2 className="tracking-wider font-semibold uppercase text-[#832729]">
 						Filters
 					</h2>
@@ -153,7 +153,7 @@ const Search = () => {
 					<Skeleton length={10} />
 				) : (
 					<div className="search-product-list flex flex-row justify-start items-start flex-wrap h-full overflow-y-auto gap-6">
-						{searchedData?.products.map((i) => (
+						{searchedData?.products.length ? searchedData?.products.map((i) => (
 							<ProductCard
 								key={i._id}
 								productId={i._id}
@@ -163,7 +163,7 @@ const Search = () => {
 								handler={addToCartHandler}
 								photo={i.photo}
 							/>
-						))}
+						)): <div className="text-5xl font-light text-[#832729] h-96 w-full text-center flex justify-center items-center">No item found</div>}
 					</div>
 				)}
 

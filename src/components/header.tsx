@@ -15,6 +15,8 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "../@/components/ui/dropdown-menu";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 interface PropsType {
 	user: User | null;
@@ -23,6 +25,8 @@ interface PropsType {
 const Header = ({ user }: PropsType) => {
 	const { data: categoriesResponse, isLoading: loadingCategories } =
 		useCategoriesQuery("");
+
+	const { cartItems } = useSelector((state: RootState) => state.cartReducer);
 
 	const logoutHandler = async () => {
 		try {
@@ -76,8 +80,8 @@ const Header = ({ user }: PropsType) => {
 					>
 						Search <FaSearch />
 					</Link>
-					<Link className="hover:scale-110 transition-all duration-300" to={"/cart"}>
-						<HiShoppingCart />
+					<Link className="hover:scale-110 transition-all duration-300 flex items-center" to={"/cart"}>
+						<HiShoppingCart /> {cartItems.length}
 					</Link>
 					{user?._id ? (
 						<>

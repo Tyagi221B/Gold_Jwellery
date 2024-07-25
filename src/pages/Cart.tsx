@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { VscError } from "react-icons/vsc";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
 	addToCart,
 	calculatePrice,
@@ -12,12 +12,12 @@ import {
 import { RootState, server } from "../redux/store";
 import { CartItem } from "../types/types";
 import { FaTrash } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 const Cart = () => {
 	const { cartItems, subtotal, tax, total, shippingCharges, discount } =
 		useSelector((state: RootState) => state.cartReducer);
 	const dispatch = useDispatch();
-	console.log(cartItems);
 
 	const { user } = useSelector((state: RootState) => state.userReducer);
 
@@ -25,7 +25,11 @@ const Cart = () => {
 	const [isValidCouponCode, setIsValidCouponCode] = useState<boolean>(false);
 
 	const incrementHandler = (cartItem: CartItem) => {
-		if (cartItem.quantity >= cartItem.stock) return;
+		if (cartItem.quantity >= cartItem.stock) {
+			toast(`Only ${cartItem.stock} item left in stock.`)
+			return;
+		}
+		
 
 		dispatch(addToCart({ ...cartItem, quantity: cartItem.quantity + 1 }));
 	};
@@ -45,7 +49,6 @@ const Cart = () => {
 				Infinity
 			);
 			processedCartItems.forEach((item: CartItem) => dispatch(addToCart(item)));
-			console.log(processedCartItems);
 		}
 	}, []);
 
@@ -80,8 +83,17 @@ const Cart = () => {
 		dispatch(calculatePrice());
 	}, [cartItems]);
 
+	const navigate = useNavigate();
+	const handleCheckoutButton = () => {
+		if (user) {
+			navigate("/shipping");
+		} else {
+			navigate("/login");
+		}
+	};
+
 	return (
-		<div className="cart py-8 px-16 flex flex-row gap-4 h-full">
+		<div className="cart py-8 px-16 flex flex-row gap-4 h-full lg:min-h-screen">
 			<section className=" relative z-10 w-8/12">
 				<div className="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto relative z-10">
 					<div className="grid ">
@@ -91,7 +103,7 @@ const Cart = () => {
 									Shopping Cart
 								</h2>
 								<h2 className="font-manrope font-bold text-xl leading-8 text-gray-600">
-									3 Items
+									{cartItems.length} items
 								</h2>
 							</div>
 							<div className="grid grid-cols-12 mt-8 max-md:hidden pb-6 border-b border-gray-200">
@@ -159,22 +171,22 @@ const Cart = () => {
 															<path
 																d="M16.5 11H5.5"
 																stroke=""
-																stroke-width="1.6"
-																stroke-linecap="round"
+																strokeWidth="1.6"
+																strokeLinecap="round"
 															/>
 															<path
 																d="M16.5 11H5.5"
 																stroke=""
 																stroke-opacity="0.2"
-																stroke-width="1.6"
-																stroke-linecap="round"
+																strokeWidth="1.6"
+																strokeLinecap="round"
 															/>
 															<path
 																d="M16.5 11H5.5"
 																stroke=""
 																stroke-opacity="0.2"
-																stroke-width="1.6"
-																stroke-linecap="round"
+																strokeWidth="1.6"
+																strokeLinecap="round"
 															/>
 														</svg>
 													</button>
@@ -196,22 +208,22 @@ const Cart = () => {
 															<path
 																d="M11 5.5V16.5M16.5 11H5.5"
 																stroke=""
-																stroke-width="1.6"
-																stroke-linecap="round"
+																strokeWidth="1.6"
+																strokeLinecap="round"
 															/>
 															<path
 																d="M11 5.5V16.5M16.5 11H5.5"
 																stroke=""
 																stroke-opacity="0.2"
-																stroke-width="1.6"
-																stroke-linecap="round"
+																strokeWidth="1.6"
+																strokeLinecap="round"
 															/>
 															<path
 																d="M11 5.5V16.5M16.5 11H5.5"
 																stroke=""
 																stroke-opacity="0.2"
-																stroke-width="1.6"
-																stroke-linecap="round"
+																strokeWidth="1.6"
+																strokeLinecap="round"
 															/>
 														</svg>
 													</button>
@@ -259,65 +271,64 @@ const Cart = () => {
 			</section>
 
 			<aside className="w-4/12 p-8 flex flex-col justify-center items-stretch gap-6 h-fit">
-			<div className="mt-6 h-full rounded-lg border bg-white p-6 shadow-md w-full">
-        <div className="mb-2 flex justify-between">
-          <p className="text-gray-700">Subtotal</p>
-          <p className="text-gray-700">₹ {subtotal}</p>
-        </div>
-        <div className="flex justify-between">
-          <p className="text-gray-700">Shipping</p>
-          <p className="text-gray-700">₹ {shippingCharges}</p>
-        </div>
-        <div className="flex justify-between">
-          <p className="text-gray-700">Tax</p>
-          <p className="text-gray-700">₹ {tax}</p>
-        </div>
-        <div className="flex justify-between">
-          <p className="text-gray-700">Discount</p>
-          <p className="text-gray-700"><em className="red"> - ₹{discount}</em></p>
-        </div>
-        <hr className="my-4" />
-				<input
-					className="block w-full h-11 text-base font-normal shadow-xs text-gray-900 bg-white border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-gray-400 px-4"
-					type="text"
-					placeholder="Coupon Code"
-					value={couponCode}
-					onChange={(e) => setCouponCode(e.target.value)}
-				/>
+				<div className="mt-6 h-full rounded-lg border bg-white p-6 shadow-md w-full">
+					<div className="mb-2 flex justify-between">
+						<p className="text-gray-700">Subtotal</p>
+						<p className="text-gray-700">₹ {subtotal}</p>
+					</div>
+					<div className="flex justify-between">
+						<p className="text-gray-700">Shipping</p>
+						<p className="text-gray-700">₹ {shippingCharges}</p>
+					</div>
+					<div className="flex justify-between">
+						<p className="text-gray-700">Tax</p>
+						<p className="text-gray-700">₹ {tax}</p>
+					</div>
+					<div className="flex justify-between">
+						<p className="text-gray-700">Discount</p>
+						<p className="text-gray-700">
+							<em className="red"> - ₹{discount}</em>
+						</p>
+					</div>
+					<hr className="my-4" />
+					<input
+						className="block w-full h-11 text-base font-normal shadow-xs text-gray-900 bg-white border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-gray-400 px-4"
+						type="text"
+						placeholder="Coupon Code"
+						value={couponCode}
+						onChange={(e) => setCouponCode(e.target.value)}
+					/>
 
-				{couponCode &&
-					(isValidCouponCode ? (
-						<span className="green -mt-4 flex flex-row justify-center items-center gap-1">
-							₹{discount} off using the{" "}
-							<code className="font-extrabold self-end">{couponCode}</code>
-						</span>
-					) : (
-						<span className="text-red-500 mt-4 flex flex-row justify-center items-center gap-1">
-							Invalid Coupon <VscError />
-						</span>
-					))}
-        <hr className="my-4" />
-        <div className="flex justify-between">
-          <p className="text-lg font-bold">Total</p>
-          <div className="">
-            <p className="mb-1 text-lg font-bold">₹ {total}</p>
-            <p className="text-sm text-gray-700">including VAT</p>
-          </div>
-        </div>
-				<button className="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600">
-				{cartItems.length > 0 && (
-					<Link
-						className=""
-						to={`${!user ? "/login" : "/shipping"}`}
-					>
-						Checkout
-					</Link>
-				)}
-				</button>
-				
-      </div>
+					{couponCode &&
+						(isValidCouponCode ? (
+							<span className="green -mt-4 flex flex-row justify-center items-center gap-1">
+								₹{discount} off using the{" "}
+								<code className="font-extrabold self-end">{couponCode}</code>
+							</span>
+						) : (
+							<span className="text-red-500 mt-4 flex flex-row justify-center items-center gap-1">
+								Invalid Coupon <VscError />
+							</span>
+						))}
+					<hr className="my-4" />
+					<div className="flex justify-between">
+						<p className="text-lg font-bold">Total</p>
+						<div className="">
+							<p className="mb-1 text-lg font-bold">₹ {total}</p>
+							<p className="text-sm text-gray-700">including VAT</p>
+						</div>
+					</div>
+
+					{cartItems.length > 0 && (
+						<button
+							onClick={handleCheckoutButton}
+							className="mt-6 w-full rounded-md bg-white py-1.5 font-medium text-[#832729] hover:bg-[#832729] hover:text-white border border-[#832729] "
+						>
+							Checkout
+						</button>
+					)}
+				</div>
 			</aside>
-			
 		</div>
 	);
 };
