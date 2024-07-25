@@ -1,96 +1,21 @@
-// import { ReactElement, useState } from "react";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
-// import { Link } from "react-router-dom";
-// import { Column } from "react-table";
-// import TableHOC from "../components/admin/TableHOC";
 import { Skeleton } from "../components/loader";
 import { useMyOrdersQuery } from "../redux/api/orderAPI";
 import { RootState, server } from "../redux/store";
 import { CustomError } from "../types/api-types";
 
-// type DataType = {
-// 	_id: string;
-// 	amount: number;
-// 	quantity: number;
-// 	discount: number;
-// 	status: ReactElement;
-// 	action: ReactElement;
-// };
-
-// const column: Column<DataType>[] = [
-// 	{
-// 		Header: "ID",
-// 		accessor: "_id",
-// 	},
-// 	{
-// 		Header: "Quantity",
-// 		accessor: "quantity",
-// 	},
-// 	{
-// 		Header: "Discount",
-// 		accessor: "discount",
-// 	},
-// 	{
-// 		Header: "Amount",
-// 		accessor: "amount",
-// 	},
-// 	{
-// 		Header: "Status",
-// 		accessor: "status",
-// 	},
-// 	{
-// 		Header: "Action",
-// 		accessor: "action",
-// 	},
-// ];
-
 const Orders = () => {
 	const { user } = useSelector((state: RootState) => state.userReducer);
 
 	const { isLoading, data, isError, error } = useMyOrdersQuery(user?._id!);
+	console.log(data)
 
-	// const [rows, setRows] = useState<DataType[]>([]);
 
 	if (isError) {
 		const err = error as CustomError;
 		toast.error(err.data.message);
 	}
-
-	// useEffect(() => {
-	// 	if (data)
-	// 		setRows(
-	// 			data.orders.map((i) => ({
-	// 				_id: i._id,
-	// 				amount: i.total,
-	// 				discount: i.discount,
-	// 				quantity: i.orderItems.length,
-	// 				status: (
-	// 					<span
-	// 						className={
-	// 							i.status === "Processing"
-	// 								? "red"
-	// 								: i.status === "Shipped"
-	// 								? "green"
-	// 								: "purple"
-	// 						}
-	// 					>
-	// 						{i.status}
-	// 					</span>
-	// 				),
-	// 				action: <Link to={`/admin/transaction/${i._id}`}>Manage</Link>,
-	// 			}))
-	// 		);
-	// }, [data]);
-
-	// const Table = TableHOC<DataType>(
-	// 	column,
-	// 	rows,
-	// 	"dashboard-product-box bg-white p-8 overflow-auto h-full w-full rounded-md",
-	// 	"Orders",
-	// 	rows.length > 6
-	// )();
-
 
 	return (
 			<div className="container max-w-[1367px] w-full m-auto overflow-auto">
@@ -125,9 +50,9 @@ const Orders = () => {
 												<p className="font-medium text-lg leading-8 text-black whitespace-nowrap">
 													OrderID : {item._id}
 												</p>
-												{/* <p className="font-medium text-lg leading-8 text-black mt-3 whitespace-nowrap">
-											Order Payment : .. / .. / ....
-										</p> */}
+												<p className="font-medium text-lg leading-8 text-black mt-3 whitespace-nowrap">
+											Order Payment : {new Date(item.createdAt).toDateString()}
+										</p>
 											</div>
 											<div className="flex items-center gap-3 max-md:mt-5">
 												<button className="rounded-full px-7 py-3 bg-white text-gray-900 border border-gray-300 font-semibold text-sm shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:bg-gray-50 hover:border-gray-400">
