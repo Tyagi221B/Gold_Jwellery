@@ -1,6 +1,6 @@
 import { useProductDetailsQuery } from "@/redux/api/productAPI";
-import { RootState, server } from "@/redux/store";
-import { useDispatch, useSelector } from "react-redux";
+import { server } from "@/redux/store";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Skeleton } from "./loader";
 import { CartItem } from "@/types/types";
@@ -8,7 +8,6 @@ import toast from "react-hot-toast";
 import { addToCart } from "@/redux/reducer/cartReducer";
 
 const ProductPage = () => {
-	const { user } = useSelector((state: RootState) => state.userReducer);
 
 	const params = useParams();
 	const dispatch = useDispatch();
@@ -81,7 +80,7 @@ const ProductPage = () => {
 									</span>
 							</p>
 							<p className="text-gray-700 mb-8">{description}</p>
-							{user && (
+							{
 								<button
 									className="w-full bg-[#832729] dark:bg-gray-600 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800"
 									onClick={() =>
@@ -97,7 +96,7 @@ const ProductPage = () => {
 								>
 									Add to Cart
 								</button>
-							)}
+							}
 						</div>
 					</div>
 				</div>

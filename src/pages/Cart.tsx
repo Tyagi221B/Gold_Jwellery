@@ -18,6 +18,8 @@ const Cart = () => {
 		useSelector((state: RootState) => state.cartReducer);
 	const dispatch = useDispatch();
 
+	const { user } = useSelector((state: RootState) => state.userReducer);
+
 	const [couponCode, setCouponCode] = useState<string>("");
 	const [isValidCouponCode, setIsValidCouponCode] = useState<boolean>(false);
 
@@ -39,7 +41,6 @@ const Cart = () => {
 		const cartItemsFromLocalStorage = localStorage.getItem("cartItems");
 		if (cartItemsFromLocalStorage) {
 			const processedCartItems = JSON.parse(cartItemsFromLocalStorage).flat(Infinity);
-			// dispatch(addToCart(processedCartItems));
       processedCartItems.forEach((item: CartItem) => dispatch(addToCart(item)));
 			console.log(processedCartItems);
 		}
@@ -90,9 +91,6 @@ const Cart = () => {
 						/>
 					))
 				) : (
-					// <h1 className="tracking-wider font-bold uppercase text-center">
-					// 	No Items Added
-					// </h1>
 					<div className="flex items-center justify-center h-full">
 					<div className="text-center flex flex-col items-center">
 						<img className="h-24 w-24 mb-8" src="https://www.tanishq.co.in/on/demandware.static/-/Library-Sites-TanishqSharedLibrary/default/dw39d0b5f4/images/cart/Group14779.svg" alt="" />
@@ -138,8 +136,8 @@ const Cart = () => {
 
 				{cartItems.length > 0 && (
 					<Link
-						className="bg-[#2e2e2e] p-4 no-underline text-white flex flex-row justify-center items-center gap-4 uppercase tracking-wider rounded-md hover:opacity-80"
-						to="/shipping"
+						className={`${!user && "bg-gray-300"} bg-[#2e2e2e] p-4 no-underline text-white flex flex-row justify-center items-center gap-4 uppercase tracking-wider rounded-md hover:opacity-80`}
+						to={`${!user ? '/login' : '/shipping'}`}
 					>
 						Checkout
 					</Link>
