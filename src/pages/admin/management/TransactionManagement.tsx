@@ -26,6 +26,7 @@ const defaultData: Order = {
   shippingCharges: 0,
   tax: 0,
   total: 0,
+  createdAt: "",
   orderItems: [],
   user: { name: "", _id: "" },
   _id: "",
