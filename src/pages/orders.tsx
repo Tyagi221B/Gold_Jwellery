@@ -153,9 +153,9 @@ const Orders = () => {
 															className="stroke-gray-600 transition-all duration-500 group-hover:stroke-indigo-600"
 															d="M14.0261 14.7259L25.5755 26.2753M14.0261 26.2753L25.5755 14.7259"
 															stroke=""
-															stroke-width="1.8"
-															stroke-linecap="round"
-															stroke-linejoin="round"
+															strokeWidth="1.8"
+															strokeLinecap="round"
+															strokeLinejoin="round"
 														/>
 													</svg>
 													cancel order

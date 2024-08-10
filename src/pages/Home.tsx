@@ -20,11 +20,11 @@ const Home = () => {
 		"https://www.tanishq.co.in/dw/image/v2/BKCK_PRD/on/demandware.static/-/Library-Sites-TanishqSharedLibrary/default/dw408b476e/homepage/HeroBanner/new-arrivals-desktop.jpg";
 
 	const IMAGES = [
-		{ url: banner1, alt: "Car One" },
-		{ url: banner2, alt: "Car Two" },
-		{ url: banner3, alt: "Car Three" },
-		{ url: banner4, alt: "Car Four" },
-		{ url: banner5, alt: "Car Five" },
+		{ url: banner1, alt: "banner One" },
+		{ url: banner3, alt: "banner Three" },
+		{ url: banner2, alt: "banner Two" },
+		{ url: banner4, alt: "banner Four" },
+		{ url: banner5, alt: "banner Five" },
 	];
 
 	return (
